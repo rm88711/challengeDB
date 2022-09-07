@@ -1,3 +1,16 @@
+/*
+INTEGRANTES:
+
+Gabriel Sun Gonçalo da Silva                RM: 88316
+
+Kleber Albert de Sousa Monteiro             RM: 88711
+
+Mikael Candiani Tine                        RM: 85250
+
+Renato Miranda Esmail                       RM: 86701
+
+O Insert esta na Ultima linha desse arquivo
+*/
 CREATE OR REPLACE FUNCTION VALIDA_CPF_CNPJ(V_CPF_CNPJ VARCHAR2) RETURN BOOLEAN IS
   e_CPF_CNPJ_null exception;
   e_cpf_cnpj_tama exception;
@@ -1481,3 +1494,7 @@ exception
 end insere_carrinho;
 /
 sho err
+--
+
+
+exec insere_restaurante_completa('PRIKKAS','PRIKKAS', '11.830.861/0001-13', 'prikkas@fiap.com.br' , 97793821,011, 55, 'celular' , 'Unova','Bulbapedia','SP', '90842-355','Rua 3 , n 9');
