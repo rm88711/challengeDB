@@ -1,0 +1,124 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="101DA77F-007D-15E6-BC1C-0E5AC303A469" name="T_PR_CARRINHO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>B522DBF5-FD76-3A0B-F95D-D6FFD1D2AD30</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_PAGAMENTO" id="A03AD589-49F3-EBE9-07E8-5F25794E9512">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>2EB72993-7960-674A-5D72-B8B4A750514C</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NR_PEDIDO" id="39B7E417-AC4D-05DA-13D6-5B722150FBBB">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>496E8540-5B5C-2759-59D8-A6DCCE5C254D</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>20</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0A85BFA8-3E2E-A77E-417C-772D9390AF6A" referredColumn="E75E3477-8BF3-DD0E-49BB-2D6158BA8B3D"/>
+</associations>
+</Column>
+<Column name="ID_CLIENTE" id="FB730D82-1FCB-8591-894B-D57A945F8041">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>C6973E78-3553-C06A-6ACB-FA1878FB0805</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0A85BFA8-3E2E-A77E-417C-772D9390AF6A" referredColumn="5D2C0382-EC6A-1B82-9008-5594BB955AB3"/>
+</associations>
+</Column>
+<Column name="ID_ENDERECO" id="60C597FA-7E64-3A3C-FF14-2E30D8D2BE89">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>18093F73-9CC2-4988-D634-40CA47ACA63B</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0A85BFA8-3E2E-A77E-417C-772D9390AF6A" referredColumn="966ABA6B-430A-CC78-D0C9-F148F45F3DFE"/>
+</associations>
+</Column>
+<Column name="ID_TP_PAGTO" id="9B26E271-B72C-6AA8-A254-02EEDEB006DB">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:42:28 UTC</createdTime>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="88CF6B77-DB98-95AF-37DC-C72A55D01378" referredColumn="078864B5-B8F1-A32D-2FED-7F437082838F"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="98EA7843-83F6-F28C-6297-97E11BD2C22D" name="PK_CARRINHO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>F72B2475-61E0-8F9C-24CD-CD15CD4AFFB7</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A03AD589-49F3-EBE9-07E8-5F25794E9512"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C0B9BAD7-B3CF-5708-4C7F-6764187CAEDA" name="FK_CARRINHO_PEDIDO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>4250489B-0D10-2789-59A6-C0FFE4FA6DE9</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FB730D82-1FCB-8591-894B-D57A945F8041"/>
+<colUsage columnID="60C597FA-7E64-3A3C-FF14-2E30D8D2BE89"/>
+<colUsage columnID="39B7E417-AC4D-05DA-13D6-5B722150FBBB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="666358FE-602E-AF66-8E81-E7F8C662A751" name="FK_CARRINHO_TIPO_PAGTO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:42:28 UTC</createdTime>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9B26E271-B72C-6AA8-A254-02EEDEB006DB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

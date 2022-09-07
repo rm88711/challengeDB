@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="5DE0BB09-C14E-72B0-34BA-D6C2BB88ED90" name="T PR CLIENTE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>24CC4280-C1B1-CB20-01EE-4AB6FDAB4719</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID CLIENTE" id="A38D1A50-E070-457E-D86D-2ECBAD0DD862">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>6F0CCEE2-5ABB-E293-AB1E-1BC8380E98DF</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="NM CLIENTE" id="724CC569-541C-CDF6-2F1F-0D58B30436EB">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>86AFF861-14BE-DD11-344A-ECD902CF3D49</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60</dataTypeSize>
+<ownDataTypeParameters>60,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="NR CPF" id="FC4F6C90-0374-5AC8-5CA4-6F6FD1B5B8BE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>09DEDF47-6057-9D5E-FB98-9B3996A2AF6D</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>14</dataTypeSize>
+<ownDataTypeParameters>14,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DS EMAIL" id="71C33942-66C8-CB79-CEF2-45C8A80E5E13">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>C557204E-A9E1-85B3-93FA-859188344004</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DT CADASTRO" id="EF0845C6-7630-5DBB-74CE-F2E70B75CBFF">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>3B297E6D-E3B8-68DC-A97A-9E79BC6BF4E6</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="9D497C66-6E18-CF59-2BC8-102CF5E5E022" name="PK CLIENTE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>744D5AA7-F0C4-9F77-45F1-5B841C8693B0</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>A38D1A50-E070-457E-D86D-2ECBAD0DD862</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

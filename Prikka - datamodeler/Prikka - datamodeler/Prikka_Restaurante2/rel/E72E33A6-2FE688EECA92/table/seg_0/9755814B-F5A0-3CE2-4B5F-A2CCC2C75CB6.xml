@@ -1,0 +1,81 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9755814B-F5A0-3CE2-4B5F-A2CCC2C75CB6" name="T_PR_END_REST">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>8690FCEC-80E2-4C0F-82AB-14A7FDFA3044</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_ENDERECO" id="29BF2115-5103-3518-A2A5-EA1A03238BA7">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>90021277-EC67-35EE-50D0-9B950E5B16F1</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8F3A5FFF-61C6-853A-5DD8-75030286C0C0" referredColumn="C66BD4E3-DF9E-08C4-D865-6CF8E7FC1E40"/>
+</associations>
+</Column>
+<Column name="ID_RESTAURANTE" id="D5B13018-EDED-EB48-818B-07F810777CBB">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>C772D356-5D4A-DB2A-EAD8-3ECBE9ED219A</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A94ACD20-61C0-C889-8303-F25CEE20EECF" referredColumn="048F734C-DE6C-2CFB-FE52-0063663CA4F7"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E9CE1376-BAA6-F470-5D96-44BF7AC63C98" name="PK_END_REST">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>5CF6EA90-33B5-5400-2D03-EC15B173807C</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="29BF2115-5103-3518-A2A5-EA1A03238BA7"/>
+<colUsage columnID="D5B13018-EDED-EB48-818B-07F810777CBB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="620C4D9C-5645-3C21-6BFF-B5E21FCB5624" name="FK_END_REST_ENDERECO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>BCEBBD7A-EF3F-25F7-0D73-3137310524FD</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="29BF2115-5103-3518-A2A5-EA1A03238BA7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="62D9FB1C-326B-158F-EF84-348E1945C3F6" name="FK_END_REST_RESTAURANTE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>1930395D-FC2C-61E5-070D-BC4F65C04C0B</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D5B13018-EDED-EB48-818B-07F810777CBB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

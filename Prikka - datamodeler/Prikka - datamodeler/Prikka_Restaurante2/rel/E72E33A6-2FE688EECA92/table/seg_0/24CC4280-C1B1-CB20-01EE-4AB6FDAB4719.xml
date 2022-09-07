@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="24CC4280-C1B1-CB20-01EE-4AB6FDAB4719" name="T_PR_CLIENTE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>59E02B9D-D838-E4A0-E191-20873C8FD786</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_CLIENTE" id="6F0CCEE2-5ABB-E293-AB1E-1BC8380E98DF">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>EC93E750-6C3F-DA43-CB28-95D4A15FF282</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NM_CLIENTE" id="86AFF861-14BE-DD11-344A-ECD902CF3D49">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>57510BAA-14D7-0A69-378C-9A4B17D7A1AD</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60</dataTypeSize>
+<ownDataTypeParameters>60,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NR_CPF" id="09DEDF47-6057-9D5E-FB98-9B3996A2AF6D">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>23E84325-9F11-5BCF-BB18-6FCF52E0E96B</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>14</dataTypeSize>
+<ownDataTypeParameters>14,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DS_EMAIL" id="C557204E-A9E1-85B3-93FA-859188344004">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>AEE14C2D-ED00-58F7-8821-566BA61893B4</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DT_CADASTRO" id="3B297E6D-E3B8-68DC-A97A-9E79BC6BF4E6">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>AEB5C272-1210-E7EB-D05C-A5165625A238</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="744D5AA7-F0C4-9F77-45F1-5B841C8693B0" name="PK_CLIENTE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>BB65AC41-FB87-BF1D-F8F1-DE587B7974B6</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6F0CCEE2-5ABB-E293-AB1E-1BC8380E98DF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

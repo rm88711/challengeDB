@@ -1,0 +1,66 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="8FCD98B4-2901-C1CB-EA74-C2600D89F909" name="T PR TEL CLIENTE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>FBBEC7DA-AF71-286F-C020-E54D6D1C8D05</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID CLIENTE" id="8D3EA007-D027-0F30-42CE-F2841098A449">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>0FE76B42-EBA3-55CD-C3B2-F2E263C88A3A</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<referedAttribute>A38D1A50-E070-457E-D86D-2ECBAD0DD862</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID TELEFONE" id="7A4BDD6C-CC58-6A80-6D66-1C23FA2E9EF9">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>7BB9BD25-C669-DD16-1052-56DC084F855A</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<referedAttribute>0194B448-1D62-6B0F-D19E-C1E54C1E0CC5</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B7B2DAE4-0C8C-F07B-55B3-910B0BFEAC86" name="PK TEL CLIENTE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>E9E674E6-6D94-1F72-D918-C3EF81705FE2</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>8D3EA007-D027-0F30-42CE-F2841098A449</attributeRef>
+<attributeRef>7A4BDD6C-CC58-6A80-6D66-1C23FA2E9EF9</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Prikka_Restaurante2" id="F58F62BD-7091-82F1-F6B0-CBD64331F4AA" version="3.5">
+<createdBy>prisc</createdBy>
+<createdTime>2022-04-04 18:50:39 UTC</createdTime>
+<ownerDesignName>Prikka_Restaurante</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>F58F62BD-7091-82F1-F6B0-CBD64331F4AA</designId>
+</OSDM_Design>

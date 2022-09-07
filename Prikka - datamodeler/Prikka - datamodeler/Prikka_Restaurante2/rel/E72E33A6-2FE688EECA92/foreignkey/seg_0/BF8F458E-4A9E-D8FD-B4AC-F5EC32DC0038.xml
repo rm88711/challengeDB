@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="BF8F458E-4A9E-D8FD-B4AC-F5EC32DC0038" containerWithKeyObject="AD541177-9B5E-F977-FAA5-904FBA74DF7C" localFKIndex="FC79D972-E8F7-C534-E91F-68D923BC5B8C" name="FK_PEDIDO_ITEM_PEDIDO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>7DED4CBA-45FA-09ED-33E4-B11C61D24F80</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<referredTableLongName>T_PR_PEDIDO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>DC40F59F-3DBB-FDE2-6452-1D0130CEE9AB</referredTableID>
+<keyObject>43C72016-3ABC-D998-24A6-A7521B7B2DFD</keyObject>
+<referredKeyID>43C72016-3ABC-D998-24A6-A7521B7B2DFD</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID_CLIENTE,ID_ENDERECO,NR_PEDIDO</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

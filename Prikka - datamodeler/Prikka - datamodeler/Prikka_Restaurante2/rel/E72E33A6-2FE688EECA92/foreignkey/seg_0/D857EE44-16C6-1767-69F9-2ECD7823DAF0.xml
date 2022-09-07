@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="D857EE44-16C6-1767-69F9-2ECD7823DAF0" containerWithKeyObject="FBBEC7DA-AF71-286F-C020-E54D6D1C8D05" localFKIndex="3047DFCC-A7F8-5079-B601-D591D73CB2F6" name="FK_TEL_CLIENTE_TELEFONE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>A214ECE3-262F-4DBA-7F1F-EE619A0E5657</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<referredTableLongName>T_PR_TELEFONE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>00048413-3699-7709-05D3-ED4F8E8C6F30</referredTableID>
+<keyObject>C201A18F-A002-3B13-7B7F-8159EF6DEC53</keyObject>
+<referredKeyID>C201A18F-A002-3B13-7B7F-8159EF6DEC53</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID_TELEFONE</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

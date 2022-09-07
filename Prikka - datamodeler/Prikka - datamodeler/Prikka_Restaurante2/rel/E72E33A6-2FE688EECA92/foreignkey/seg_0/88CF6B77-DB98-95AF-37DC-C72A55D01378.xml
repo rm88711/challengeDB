@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="88CF6B77-DB98-95AF-37DC-C72A55D01378" containerWithKeyObject="101DA77F-007D-15E6-BC1C-0E5AC303A469" localFKIndex="666358FE-602E-AF66-8E81-E7F8C662A751" name="FK_CARRINHO_TIPO_PAGTO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:42:28 UTC</createdTime>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<referredTableLongName>T_PR_TIPO_PAGTO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>B5E7AC90-19A0-C77E-073F-D0AD560DE28A</referredTableID>
+<keyObject>1E474ECB-F851-BD7A-653E-BFEB4ACB6887</keyObject>
+<referredKeyID>1E474ECB-F851-BD7A-653E-BFEB4ACB6887</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID_TP_PAGTO</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

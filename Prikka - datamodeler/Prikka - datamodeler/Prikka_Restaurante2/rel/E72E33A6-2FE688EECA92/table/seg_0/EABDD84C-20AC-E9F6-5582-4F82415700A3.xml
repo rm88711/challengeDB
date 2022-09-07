@@ -1,0 +1,124 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="EABDD84C-20AC-E9F6-5582-4F82415700A3" name="T_PR_CARDAPIO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>74318476-EE64-A496-377B-B059C5192AD2</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_CARDAPIO" id="E2CA6FEC-F33D-23D2-D8C2-5501EBADEF72">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>89D01BC2-32A4-CC57-62EE-B2477B77FC1F</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_RESTAURANTE" id="73E99C25-BF0A-12E2-544A-7FDCF0771CE9">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>450329EA-AFE0-BEE8-D6FE-9896085DB86B</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4486FB42-7809-7BF9-DCBA-01AB87B60CDA" referredColumn="048F734C-DE6C-2CFB-FE52-0063663CA4F7"/>
+</associations>
+</Column>
+<Column name="NM_ITEM_CARDAPIO" id="78BBB352-F8A4-BDD8-9DFD-DE72D98DA219">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>BD2142A4-881C-4122-42D7-6A47400BDFFE</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VL_ITEM_CARDAPIO" id="AE644F04-8A9C-65F7-21A9-DB64409CACF3">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>E54DAF69-5D13-64ED-F186-551B12A7778C</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>20</dataTypePrecision>
+<ownDataTypeParameters>,20,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DS_ITEM_CARDAPIO" id="61972616-7F63-7ECE-0DA3-B5312CEE1C0A">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>0F907FE8-7C98-5FE0-DEEE-5E811379DB03</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60</dataTypeSize>
+<ownDataTypeParameters>60,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FT_FOTO" id="BDB8ACBF-9688-7418-7B95-C1EE26B837DA">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>E0B48706-E62C-7DC9-7EA9-7FFDB4A8BB8C</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DT_CADASTRO" id="DB59B4C4-E9C4-089B-F627-D7BD4584DCD5">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>97918390-46A4-19AA-A5E1-2B915CC83BCE</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2F15D6AF-2ECD-AC39-3109-763BB309C5FC" name="PK_CARDAPIO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>B5D9FEE5-0687-2282-3CFA-60ED52F3A99A</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E2CA6FEC-F33D-23D2-D8C2-5501EBADEF72"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="911BD353-DAA4-27D8-2F2D-AEA12F089A8C" name="FK_CARDAPIO_RESTAURANTE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>461A876A-4CE9-35AB-64B0-AD4A8A5024B6</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="73E99C25-BF0A-12E2-544A-7FDCF0771CE9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

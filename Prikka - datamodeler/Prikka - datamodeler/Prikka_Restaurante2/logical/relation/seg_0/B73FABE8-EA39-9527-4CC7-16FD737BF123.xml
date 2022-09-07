@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="FK_CIDADE__ESTADO" directorySegmentName="seg_0" id="B73FABE8-EA39-9527-4CC7-16FD737BF123">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>D8B16B85-A57F-C815-4D08-CB310505171D</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<sourcePk>6F5EEA49-5F18-6B0B-61B1-CA23A5CE510E</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>76FD9A7B-C8B4-F142-E10B-CF4A8E37E794</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>D77DF8C6-E727-B02F-F9B9-D3C1BF1C67F6</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

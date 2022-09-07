@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0FA208BE-EC3B-D60F-E2CB-17B23BE0EDBC" name="T_PR_CIDADE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>6D45AAE6-8635-8611-86EE-204D7BE75441</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_CIDADE" id="49C4D9D9-A1B5-62A5-EB27-C8A2A170EBA3">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>9C38A68E-083A-F9D0-75E3-D67478E2D9D6</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_ESTADO" id="2519D336-1ABC-5CF3-71CA-8C214C8CAAAE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:51:50 UTC</createdTime>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D8B16B85-A57F-C815-4D08-CB310505171D" referredColumn="C54ACD00-4A1B-AF7E-B585-A1CD5920E2E1"/>
+</associations>
+</Column>
+<Column name="NM_CIDADE" id="42B1C80E-59E4-D026-7E76-DC0FC0F04E03">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>A5897D16-F108-48D4-C4EB-3BDE17EBA8F4</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0CF15EED-5D04-EF78-53E3-11C1CE4B8931" name="PK_CIDADE">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:50:02 UTC</createdTime>
+<generatorID>C5DD2694-E3D7-EF9F-CEE3-660E6F9C5649</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="49C4D9D9-A1B5-62A5-EB27-C8A2A170EBA3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0EEA96A6-218E-0679-C4E5-35F7576A1B2D" name="FK_CIDADE__ESTADO">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-16 19:51:50 UTC</createdTime>
+<generatorID>4E26E9EF-FB70-AB7B-3640-B3FA34662930</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2519D336-1ABC-5CF3-71CA-8C214C8CAAAE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

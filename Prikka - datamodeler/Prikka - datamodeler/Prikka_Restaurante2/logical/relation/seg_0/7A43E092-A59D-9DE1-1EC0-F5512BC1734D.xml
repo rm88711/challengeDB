@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="FK_CARDAPIO_RESTAURANTE" directorySegmentName="seg_0" id="7A43E092-A59D-9DE1-1EC0-F5512BC1734D">
+<createdBy>prisc</createdBy>
+<createdTime>2022-05-18 20:54:02 UTC</createdTime>
+<generatorID>4486FB42-7809-7BF9-DCBA-01AB87B60CDA</generatorID>
+<ownerDesignName>Prikka_Restaurante2</ownerDesignName>
+<engineerTo>
+<item key="E72E33A6-2E1D-FEF1-9264-2FE688EECA92" value="true"/>
+</engineerTo>
+<sourcePk>C70094F9-2091-176C-EF2D-3A46057F2A48</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>D5ABC989-BB41-5B6A-E709-B2177984D6D4</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>2DFF417C-267F-3E15-4CB9-67A08D1FABE2</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
