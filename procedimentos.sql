@@ -124,6 +124,7 @@ create or replace procedure insere_restaurante(p_nome_restaurante in varchar2
                                               ,p_email            in varchar2
                                               ) is
  vn_id_restaurante  number;
+ v_cpf_cnpj         varchar2(14);
  e_nm_rest_null     exception;
  e_cnpj_rest_null   exception;
  e_email_rest_null  exception;
@@ -149,6 +150,8 @@ begin
     raise e_email_invalido;
   end if;
   --
+  v_cpf_cnpj := regexp_replace(p_nr_cnpj_rest, '[^0-9]'); 
+  --
   insert into t_pr_restaurante( id_restaurante 
                               , nm_restaurante 
                               , nr_cnpj_rest   
@@ -156,7 +159,7 @@ begin
                               , dt_cadastro)
                        values (vn_id_restaurante
                               ,p_nm_cnpj_rest
-                              ,p_nr_cnpj_rest
+                              ,v_cpf_cnpj
                               ,p_email
                               ,sysdate );
   --
@@ -183,6 +186,7 @@ create or replace function cnpj_existe(p_nr_cnpj_rest in varchar2) return boolea
 vn_count        number;
 e_cnpj_null     exception;
 e_cnpj_invalido exception;
+v_cpf_cnpj      varchar2(14);
 begin
   --
   if p_nr_cnpj_rest is null then
@@ -191,10 +195,12 @@ begin
     raise e_cnpj_invalido;
   end if;
   --
+  v_cpf_cnpj := regexp_replace(p_nr_cnpj_rest, '[^0-9]'); 
+  --
   select count(1)
     into vn_count
-   from t_pr_restaurante c 
-   where c.nr_cnpj_rest = p_nr_cnpj_rest;
+    from t_pr_restaurante c 
+   where c.nr_cnpj_rest = v_cpf_cnpj;
   --
   if vn_count > 0 then
     return true;
@@ -216,16 +222,19 @@ sho err
 create or replace function obtem_id_restaurante(p_nr_cnpj in varchar2) return number is
  vn_id_restaurante number;
  e_cnpj_null       exception;
+ v_cpf_cnpj        varchar2(14);
 begin
   --
   if p_nr_cnpj is null then
     raise e_cnpj_null;
   end if;
   --
+  v_cpf_cnpj := regexp_replace(p_nr_cnpj, '[^0-9]'); 
+  --
   select id_restaurante
     into vn_id_restaurante
     from t_pr_restaurante
-   where nr_cnpj_rest = p_nr_cnpj;
+   where nr_cnpj_rest = v_cpf_cnpj;
   --
   return vn_id_restaurante;
   --
@@ -244,6 +253,7 @@ create or replace procedure insere_cliente( p_nm_cliente in varchar2
                                            ,p_nr_cpf     in varchar2
                                            ,p_ds_email   in varchar2) is
   vn_id_cliente  number;
+  v_cpf_cnpj     varchar2(14);
   e_cliente_null exception;
   e_cpf_null     exception;
   e_email_null   exception;
@@ -269,6 +279,8 @@ begin
     raise e_email_inval;
   end if;
   --
+  v_cpf_cnpj := regexp_replace(p_nr_cpf, '[^0-9]'); 
+  --
   insert into t_pr_cliente (id_cliente  
                            ,nm_cliente  
                            ,nr_cpf      
@@ -276,7 +288,7 @@ begin
                            ,dt_cadastro)
                    values ( vn_id_cliente
                            ,p_nm_cliente 
-                           ,p_nr_cpf     
+                           ,v_cpf_cnpj     
                            ,p_ds_email   
                            ,sysdate);
 
@@ -300,19 +312,59 @@ end insere_cliente;
 /
 sho err
 --
+create or replace function existe_cliente(p_nr_cpf in varchar2) return boolean is
+vn_count        number;
+e_cpf_null      exception;
+e_cpf_invalido  exception;
+v_cpf_cnpj      varchar2(14);
+begin
+  --
+  if p_nr_cpf is null then
+    raise e_cpf_null;
+  elsif not valida_cpf_cnpj(v_cpf_cnpj => p_nr_cpf) then
+    raise e_cpf_invalido;
+  end if;
+  --
+  v_cpf_cnpj := regexp_replace(p_nr_cpf, '[^0-9]'); 
+  --
+  select count(1)
+    into vn_count
+    from t_pr_cliente t
+   where t.nr_cpf = v_cpf_cnpj;
+  --
+  if vn_count > 0 then
+    return true;
+  else
+    return false;
+  end if;
+  --
+exception
+  when e_cpf_invalido then
+    raise_application_error (-20000, 'O CPF não é válido.');
+  when e_cpf_null then
+    raise_application_error (-20000, 'O CPF do cliente não foi informado.');
+  when others then
+    raise_application_error (-20000, 'existe_cliente: ' || sqlerrm);
+end existe_cliente;
+/
+sho err
+--
 create or replace function obtem_id_cliente(p_nr_cpf in varchar2) return number is 
  vv_nr_cpf varchar2(20);
  e_cpf_null exception;
+ v_cpf_cnpj varchar2(14);
 begin
   --
   if p_nr_cpf is null then
     raise e_cpf_null;
   end if;
   --
+  v_cpf_cnpj := regexp_replace(p_nr_cpf, '[^0-9]'); 
+  --
   select id_cliente 
     into vv_nr_cpf
     from T_PR_CLIENTE
-   where nr_cpf = p_nr_cpf;
+   where nr_cpf = v_cpf_cnpj;
    --
   return vv_nr_cpf;
   --
@@ -325,7 +377,6 @@ exception
   when others then
     raise_application_error (-20000, 'obtem_id_cliente: ' || sqlerrm);
 end obtem_id_cliente;
---
 / 
 sho err
 --
@@ -925,6 +976,44 @@ end insere_endereco;
 /
 sho err
 --
+create or replace function obtem_id_endereco_cliente(p_id_cliente    in number
+                                                    ,p_nm_bairro     in varchar2
+                                                    ,p_nm_cidade     in varchar2
+                                                    ,p_sg_estado     in varchar2
+                                                    ,p_ds_logradouro in varchar2) return number is 
+vn_id_endereco number;
+begin
+  --
+  select ed.id_endereco
+    into vn_id_endereco
+    from T_PR_END_CLIENTE ec
+       , T_PR_ENDERECO ed
+       , T_PR_BAIRRO   ba
+       , T_PR_CIDADE   ci
+       , T_PR_ESTADO es
+   where ci.id_estado     = es.id_estado 
+     and ba.id_cidade     = ci.id_cidade
+     and ed.id_endereco   = ec.id_endereco
+     and ba.id_bairro     = ed.id_bairro
+     and ba.nm_bairro     = upper(p_nm_bairro)
+     and ci.nm_cidade     = upper(p_nm_cidade)
+     and es.sg_estado     = upper(p_sg_estado)
+     and ed.ds_logradouro = upper(p_ds_logradouro)
+     and ec.id_cliente    = p_id_cliente;
+  --
+  return vn_id_endereco;
+  --
+exception
+  when too_many_rows then
+    raise_application_error (-20000, 'Mais de um endereço localizado reveja seu cadastro.');
+  when no_data_found then
+    raise_application_error (-20000, 'Endereço não cadastrado para o cliente.');
+  when others then
+    raise_application_error (-20000, 'obtem_id_endereco_cliente: ' || sqlerrm);
+end obtem_id_endereco_cliente;
+/
+sho err
+--
 create or replace procedure insere_restaurante_completa(p_nome_restaurante in varchar2
                                                        ,p_nm_cnpj_rest     in varchar2
                                                        ,p_nr_cnpj_rest     in varchar2
@@ -944,7 +1033,6 @@ e_cnpj_duplicado  exception;
 e_endereco_null   exception;
 begin
   --
-  -- ve se existe
   if cnpj_existe(p_nr_cnpj_rest => p_nr_cnpj_rest) then
     raise e_cnpj_duplicado;
   else
@@ -983,5 +1071,413 @@ exception
   when others then
     raise_application_error(-20000, 'insere_restaurante_completa: '||sqlerrm);
 end insere_restaurante_completa;
+/
+sho err
+--
+create or replace procedure insere_cliente_completo(p_nm_cliente  in varchar2
+                                                   ,p_nr_cpf      in varchar2
+                                                   ,p_ds_email    in varchar2
+                                                   ,p_nr_telefone in number
+                                                   ,p_nr_ddd      in number
+                                                   ,p_nr_ddi      in number
+                                                   ,p_ds_telefone in varchar2
+                                                   ,p_nm_bairro     in varchar2
+                                                   ,p_nm_cidade     in varchar2
+                                                   ,p_sg_estado     in varchar2
+                                                   ,p_nr_cep        in varchar2
+                                                   ,p_ds_logradouro in varchar2
+                                                   ) is
+e_cpf_exist     exception;
+e_endereco_null exception;
+vn_id_endereco  number;
+vn_id_cliente   number;
+begin
+  --
+  if existe_cliente(p_nr_cpf => p_nr_cpf) then
+    raise e_cpf_exist;
+  else
+    insere_cliente_telefone(p_nm_cliente  => p_nm_cliente 
+                           ,p_nr_cpf      => p_nr_cpf   
+                           ,p_ds_email    => p_ds_email
+                           ,p_nr_telefone => p_nr_telefone   
+                           ,p_nr_ddd      => p_nr_ddd
+                           ,p_nr_ddi      => p_nr_ddi
+                           ,p_ds_telefone => p_ds_telefone );
+  end if; 
+  --
+  vn_id_endereco := insere_endereco(p_nm_bairro     => p_nm_bairro
+                                   ,p_nm_cidade     => p_nm_cidade
+                                   ,p_sg_estado     => p_sg_estado
+                                   ,p_nr_cep        => p_nr_cep
+                                   ,p_ds_logradouro => p_ds_logradouro);
+  --
+  if vn_id_endereco is null then
+    raise e_endereco_null ;
+  end if;
+  --
+  vn_id_cliente := obtem_id_cliente(p_nr_cpf => p_nr_cpf);
+  --
+  insert into t_pr_end_cliente(id_cliente,id_endereco)
+               values  (vn_id_cliente,vn_id_endereco);
+  --
+  commit;
+  --
+exception
+  when e_endereco_null then
+    raise_application_error(-20000, 'Não foi possível cadastrar o endereço '||sqlerrm);
+  when e_cpf_exist then
+    raise_application_error(-20000, 'CPF já foi cadastrado.');
+  when others then
+    raise_application_error(-20000, 'insere_cliente_completo: '||sqlerrm);
+end insere_cliente_completo;
+/
+sho err
+--
+create or replace procedure insere_cardapio(p_nr_cnpj          in varchar2
+                                           ,p_nm_item_cardapio in varchar2
+                                           ,p_vl_item_cardapio in number
+                                           ,p_ds_item_cardapio in varchar2) is
+vrt_cardapio t_pr_cardapio%rowtype;
+e_vl_null    exception;
+e_nm_null    exception; 
+begin
+  --
+  if p_nm_item_cardapio is null then
+    raise e_nm_null;
+  end if;
+  --
+  if p_vl_item_cardapio is null then
+    raise e_vl_null;
+  end if;
+  --
+  vrt_cardapio.id_restaurante   := obtem_id_restaurante(p_nr_cnpj => p_nr_cnpj);
+  vrt_cardapio.id_cardapio      := sq_pr_cardapio.nextval;
+  vrt_cardapio.nm_item_cardapio := p_nm_item_cardapio;
+  vrt_cardapio.vl_item_cardapio := p_vl_item_cardapio;
+  vrt_cardapio.ds_item_cardapio := p_ds_item_cardapio;
+  vrt_cardapio.dt_cadastro      := sysdate;
+  --
+  insert into t_pr_cardapio values vrt_cardapio ;
+  --
+  commit;
+  --
+exception
+  when e_nm_null then
+    raise_application_error(-20000, 'Nome do prato esta nulo.');
+  when e_vl_null then
+    raise_application_error(-20000, 'Informe o valor.');
+  when others then
+    raise_application_error(-20000, 'insere_cardapio: '||sqlerrm);
+end insere_cardapio;
+/
+sho err
+--
+create or replace function valor_cardapio(p_id_cardapio in number) return number is
+v_valor_cardapio number;
+e_cardapio_null  exception;
+begin
+  --
+  if p_id_cardapio is null then
+    raise e_cardapio_null;
+  end if;
+  --
+  select vl_item_cardapio
+    into v_valor_cardapio
+    from t_pr_cardapio 
+   where id_cardapio = p_id_cardapio;
+  --
+  return v_valor_cardapio;
+  --
+exception
+  when e_cardapio_null then
+    raise_application_error (-20000, 'O Id do cardapio esta nulo');
+  when no_data_found then
+    raise_application_error (-20000, 'Item não localizado.');
+  when others then
+    raise_application_error (-20000, 'valor_cardapio: ' || sqlerrm);
+end valor_cardapio;
+/
+sho err
+--
+create or replace procedure insere_pedido(p_nr_cpf        in varchar2
+                                         ,p_nm_bairro     in varchar2
+                                         ,p_nm_cidade     in varchar2
+                                         ,p_sg_estado     in varchar2
+                                         ,p_ds_logradouro in varchar2 ) is
+vrt_pedido        t_pr_pedido%rowtype;
+e_cpf_null        exception;
+e_bairro_null     exception;
+e_cidade_null     exception;
+e_sg_null         exception;
+e_logradouro_null exception;
+--
+begin
+  --
+  if p_nr_cpf is null then
+    raise e_cpf_null;
+  end if;
+  --
+  if p_nm_bairro is null then
+    raise e_bairro_null;
+  end if;
+  --
+  if p_nm_cidade is null then
+    raise e_cidade_null;
+  end if;
+  --
+  if p_sg_estado is null then
+    raise e_sg_null;
+  end if;
+  --
+  if p_ds_logradouro is null then
+    raise e_logradouro_null;
+  end if;
+  --
+  vrt_pedido.id_cliente := obtem_id_cliente(p_nr_cpf => p_nr_cpf);
+  --
+  vrt_pedido.id_endereco := obtem_id_endereco_cliente(p_id_cliente    => vrt_pedido.id_cliente
+                                                     ,p_nm_bairro     => p_nm_bairro
+                                                     ,p_nm_cidade     => p_nm_cidade
+                                                     ,p_sg_estado     => p_sg_estado
+                                                     ,p_ds_logradouro => p_ds_logradouro);
+  --
+  vrt_pedido.nr_pedido        := sq_pr_pedido.nextval;
+  vrt_pedido.dt_pedido        := sysdate;
+  vrt_pedido.vl_pedido        := 0;
+  vrt_pedido.ds_status_pedido := 'ABERTO';
+  --
+  insert into t_pr_pedido values vrt_pedido;
+  --
+  commit;
+  --
+exception
+  when e_cpf_null then
+    raise_application_error(-20000, 'É necessário informar o CPF.');
+  when e_cidade_null then
+    raise_application_error(-20000, 'A cidade não foi informada.');
+  when e_sg_null then
+    raise_application_error(-20000, 'A sigla esta Nula.');
+  when e_bairro_null then
+    raise_application_error(-20000, 'É preciso informar o bairro.');
+  when e_logradouro_null then
+    raise_application_error(-20000, 'Informe o Logardouro.');
+  when others then
+    raise_application_error(-20000, 'insere_pedido: '||sqlerrm);
+end insere_pedido;
+/
+sho err
+--
+create or replace procedure obtem_informacao_pedido(p_nr_pedido         in number
+                                                   ,p_id_cliente       out number
+                                                   ,p_id_endereco      out number
+                                                   ,p_dt_pedido        out date
+                                                   ,p_vl_pedido        out number
+                                                   ,p_ds_status_pedido out varchar2 ) is
+vrt_pedido    t_pr_pedido%rowtype;
+e_null_pedido exception;
+begin
+  --
+  if p_nr_pedido is null then
+    raise e_null_pedido;
+  end if;
+  --
+  select *
+    into vrt_pedido
+    from t_pr_pedido
+   where nr_pedido = p_nr_pedido;
+  --
+  p_id_cliente       := vrt_pedido.id_cliente;      
+  p_id_endereco      := vrt_pedido.id_endereco;      
+  p_dt_pedido        := vrt_pedido.dt_pedido;       
+  p_vl_pedido        := vrt_pedido.vl_pedido;        
+  p_ds_status_pedido := vrt_pedido.ds_status_pedido ;
+  --
+exception
+  when e_null_pedido then
+    raise_application_error(-20000, 'Pedido esta nulo.');
+  when no_data_found then
+    raise_application_error(-20000, 'Pedido não encotrado');
+  when others then
+    raise_application_error(-20000, 'obtem_informacao_pedido: '||sqlerrm);
+end obtem_informacao_pedido;
+/
+sho err
+--
+create or replace procedure atualiza_valor_pedido(p_id_cardapio in number
+                                                 ,p_nr_pedido   in number) is
+v_valor         number;
+e_cardapio_null exception;
+e_pedido_null   exception;
+begin
+  --
+  if p_id_cardapio is null then
+    raise e_cardapio_null;
+  end if;
+  --
+  if p_nr_pedido is null then
+    raise e_pedido_null;
+  end if;
+  --
+  v_valor := valor_cardapio(p_id_cardapio => p_id_cardapio);
+  --
+  update t_pr_pedido
+     set vl_pedido = vl_pedido + v_valor
+   where nr_pedido = p_nr_pedido;
+  --
+exception
+  when e_pedido_null then
+    raise_application_error(-20000, 'Pedido esta nulo.');
+  when e_cardapio_null then
+    raise_application_error(-20000, 'O Id cardapio não foi informado.');
+  when others then
+    raise_application_error(-20000, 'atualiza_valor_pedido: '||sqlerrm);
+end atualiza_valor_pedido;
+/
+sho err
+--
+create or replace procedure insere_itens_pedido(p_id_cardapio in number
+                                               ,p_nr_pedido   in number) is
+e_null_cardapio exception;
+e_null_pedido   exception;
+vrt_pedido      t_pr_pedido%rowtype;      
+begin
+  --
+  if p_id_cardapio is null then
+    raise e_null_cardapio;
+  end if;
+  --
+  if p_nr_pedido is null then
+    raise e_null_pedido;
+  end if;
+  --
+  obtem_informacao_pedido(p_nr_pedido        => p_nr_pedido
+                         ,p_id_cliente       => vrt_pedido.id_cliente
+                         ,p_id_endereco      => vrt_pedido.id_endereco
+                         ,p_dt_pedido        => vrt_pedido.dt_pedido
+                         ,p_vl_pedido        => vrt_pedido.vl_pedido
+                         ,p_ds_status_pedido => vrt_pedido.ds_status_pedido ); 
+  --
+  insert into  t_pr_pedido_item (id_cardapio
+                                ,id_cliente 
+                                ,id_endereco
+                                ,nr_pedido)
+                          values(p_id_cardapio
+                                ,vrt_pedido.id_cliente
+                                ,vrt_pedido.id_endereco
+                                ,p_nr_pedido);
+  --
+  atualiza_valor_pedido(p_id_cardapio => p_id_cardapio
+                       ,p_nr_pedido   => p_nr_pedido);
+  --
+exception
+  when e_null_pedido then
+    raise_application_error(-20000, 'O Id pedido esta nulo.');
+  when e_null_cardapio then
+    raise_application_error(-20000, 'Não encontrado o id do cardapio.');
+  when others then
+    raise_application_error(-20000, 'insere_itens_pedido: '||sqlerrm);
+end insere_itens_pedido;
+/
+sho err
+--
+create or replace procedure insere_tipo_pagamento(p_ds_tp_pagto in varchar2) is
+e_tp_null       exception;
+e_tp_tam        exception;
+vn_id_pagamento number;
+begin
+  --
+  if p_ds_tp_pagto is null then
+    raise e_tp_null;
+  elsif LENGTH(p_ds_tp_pagto) > 30 then
+    raise e_tp_tam;
+  end if;
+  --
+  vn_id_pagamento := sq_pr_tipo_pagto.nextval;
+  --
+  insert into t_pr_tipo_pagto(id_tp_pagto,ds_tp_pagto)
+            values(vn_id_pagamento,upper(p_ds_tp_pagto));
+  --
+  commit;
+  --
+exception
+  when e_tp_tam then
+    raise_application_error(-20000, 'O Tipo de pagamento ultrapassou o limite de 30 caracteres.');
+  when e_tp_null then
+    raise_application_error(-20000, 'o tipo de pagamento não foi informado.');
+  when others then
+    raise_application_error(-20000, 'insere_tipo_pagamento: '||sqlerrm);
+end insere_tipo_pagamento;
+/
+sho err
+--
+create or replace function obtem_id_pagamento(p_tp_pagto in varchar2) return number is
+vn_id_pagamento number;
+e_tp_null       exception;
+begin
+  --
+  if p_tp_pagto is null then
+    raise e_tp_null;
+  end if;
+  --
+  select id_tp_pagto
+    into vn_id_pagamento
+    from t_pr_tipo_pagto
+   where ds_tp_pagto = p_tp_pagto;
+  --
+  return vn_id_pagamento;
+  --
+exception
+  when e_tp_null then
+    raise_application_error (-20000, 'É necessário informar o tipo pagamento.');
+  when no_data_found then
+    raise_application_error (-20000, 'Tipo de pagamento não encontrado.');
+  when others then
+    raise_application_error (-20000, 'obtem_id_pagamento: ' || sqlerrm);
+end obtem_id_pagamento;
+/
+sho err
+--
+create or replace procedure insere_carrinho(p_nr_pedido   in number
+                                          ,p_tp_pagto    in varchar2) is
+vn_id_tp_pagamento number;
+vrt_pedido         t_pr_pedido%rowtype;
+vrt_carrinho       t_pr_carrinho%rowtype;
+e_pedido_null      exception;
+e_tp_pg_null       exception;
+begin
+  --
+  if p_nr_pedido is null then
+    raise e_pedido_null;
+  end if;
+  --
+  if p_tp_pagto is null then
+    raise e_tp_pg_null;
+  end if;
+  --
+  vn_id_tp_pagamento := obtem_id_pagamento(p_tp_pagto => p_tp_pagto) ;
+  --
+  obtem_informacao_pedido(p_nr_pedido        => p_nr_pedido
+                         ,p_id_cliente       => vrt_pedido.id_cliente
+                         ,p_id_endereco      => vrt_pedido.id_endereco
+                         ,p_dt_pedido        => vrt_pedido.dt_pedido
+                         ,p_vl_pedido        => vrt_pedido.vl_pedido
+                         ,p_ds_status_pedido => vrt_pedido.ds_status_pedido ); 
+  --
+  vrt_carrinho.id_pagamento := sq_pr_carrinho.nextval;
+  vrt_carrinho.nr_pedido    := p_nr_pedido;
+  vrt_carrinho.id_cliente   := vrt_pedido.id_cliente;
+  vrt_carrinho.id_endereco  := vrt_pedido.id_endereco;
+  vrt_carrinho.id_tp_pagto  := vn_id_tp_pagamento;
+  --
+  insert into t_pr_carrinho values vrt_carrinho;
+  --
+exception
+  when e_pedido_null then
+    raise_application_error(-20000, 'O Pedido esta Nulo.');
+  when e_tp_pg_null then
+    raise_application_error(-20000, 'o Tipo de pagamento não foi informado.');
+  when others then
+    raise_application_error(-20000, 'insere_carrinho: '||sqlerrm);
+end insere_carrinho;
 /
 sho err
