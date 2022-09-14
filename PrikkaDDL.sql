@@ -68,7 +68,7 @@ CREATE TABLE t_pr_cardapio (
     vl_item_cardapio NUMBER(20) NOT NULL,
     ds_item_cardapio VARCHAR2(60) NOT NULL,
     ft_foto          BLOB,
-    dt_cadastro      DATE NOT NULL
+    dt_cadastro      DATE
 );
 
 ALTER TABLE t_pr_cardapio ADD CONSTRAINT pk_cardapio PRIMARY KEY ( id_cardapio );
@@ -97,7 +97,7 @@ CREATE TABLE t_pr_cliente (
     nm_cliente  VARCHAR2(60) NOT NULL,
     nr_cpf      VARCHAR2(14) NOT NULL,
     ds_email    VARCHAR2(100) NOT NULL,
-    dt_cadastro DATE NOT NULL,
+    dt_cadastro DATE,
     CONSTRAINT uk_cpf_cliente UNIQUE (nr_cpf)
 );
 
@@ -169,7 +169,7 @@ CREATE TABLE t_pr_restaurante (
     nm_restaurante VARCHAR2(50) NOT NULL,
     nr_cnpj_rest   VARCHAR2(18) NOT NULL,
     ds_email       VARCHAR2(100) NOT NULL,
-    dt_cadastro    DATE NOT NULL,
+    dt_cadastro    DATE,
     CONSTRAINT uk_cnpj_restaurante UNIQUE (nr_cnpj_rest)
 );
 

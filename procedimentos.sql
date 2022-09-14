@@ -1498,3 +1498,4 @@ sho err
 
 
 exec insere_restaurante_completa('PRIKKAS','PRIKKAS', '11.830.861/0001-13', 'prikkas@fiap.com.br' , 97793821,011, 55, 'celular' , 'Unova','Bulbapedia','SP', '90842-355','Rua 3 , n 9');
+exec insere_cliente_completo('Richard Rich','243.885.210-00','rich@fiap.com.br',11998877,11,55,'CELULAR','Vila Nova','São Paolo','SP','17120-970','Rua Bola , n 3');
