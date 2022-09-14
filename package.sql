@@ -1,17 +1,156 @@
-/*
-INTEGRANTES:
-
-Gabriel Sun Gonçalo da Silva                RM: 88316
-
-Kleber Albert de Sousa Monteiro             RM: 88711
-
-Mikael Candiani Tine                        RM: 85250
-
-Renato Miranda Esmail                       RM: 86701
-
-O Insert esta na Ultima linha desse arquivo
-*/
-CREATE OR REPLACE FUNCTION VALIDA_CPF_CNPJ(V_CPF_CNPJ VARCHAR2) RETURN BOOLEAN IS
+create or replace package pack_pr_prikka as 
+--
+FUNCTION VALIDA_CPF_CNPJ(V_CPF_CNPJ VARCHAR2) RETURN BOOLEAN;
+--
+function email_valido (p_email in  varchar2) return boolean;
+--
+procedure insere_restaurante(p_nome_restaurante in varchar2
+                                              ,p_nm_cnpj_rest     in varchar2
+                                              ,p_nr_cnpj_rest     in varchar2
+                                              ,p_email            in varchar2
+                                              ) ;
+--
+function cnpj_existe(p_nr_cnpj_rest in varchar2) return boolean;
+--
+function obtem_id_restaurante(p_nr_cnpj in varchar2) return number;
+--
+procedure insere_cliente( p_nm_cliente in varchar2
+                        , p_nr_cpf     in varchar2
+                        , p_ds_email   in varchar2);
+--
+function existe_cliente(p_nr_cpf in varchar2) return boolean;
+--
+function obtem_id_cliente(p_nr_cpf in varchar2) return number;
+--
+function insere_telefone(p_nr_telefone in number
+                        ,p_nr_ddd      in number
+                        ,p_nr_ddi      in number
+                        ,p_ds_telefone in varchar2) return number;
+--
+procedure insere_cliente_telefone(p_nm_cliente  in varchar2
+                                 ,p_nr_cpf      in varchar2
+                                 ,p_ds_email    in varchar2
+                                 ,p_nr_telefone in number
+                                 ,p_nr_ddd      in number
+                                 ,p_nr_ddi      in number
+                                 ,p_ds_telefone in varchar2);
+--
+procedure insere_restaurante_telefone(p_nome_restaurante in varchar2
+                                     ,p_nm_cnpj_rest     in varchar2
+                                     ,p_nr_cnpj_rest     in varchar2
+                                     ,p_email            in varchar2
+                                     ,p_nr_telefone      in number
+                                     ,p_nr_ddd           in number
+                                     ,p_nr_ddi           in number
+                                     ,p_ds_telefone      in varchar2) ;
+procedure insere_estado(p_nm_estado in varchar2
+                       ,p_sg_estado in varchar2);
+--
+function obtem_id_estado(p_sg_estado in varchar2) return number;
+--
+function existe_estado(p_sg_estado in varchar2) return boolean;
+--
+procedure insere_cidade(p_sg_estado in varchar2
+                       ,p_nm_estado in varchar2 default null
+                       ,p_nm_cidade in varchar2);
+--
+function obtem_id_cidade(p_nm_cidade in varchar2
+                        ,p_sg_estado in varchar2) return number;
+--
+function existe_cidade(p_nm_cidade in varchar2
+                      ,p_sg_estado in varchar2) return boolean;
+--
+procedure insere_bairro (p_sg_estado in varchar2
+                        ,p_nm_cidade in varchar2
+                        ,p_nm_bairro in varchar2);
+--
+function obtem_id_bairro(p_nm_bairro in varchar2
+                        ,p_nm_cidade in varchar2
+                        ,p_sg_estado in varchar2) return number;
+--
+function existe_bairro(p_nm_bairro in varchar2
+                      ,p_nm_cidade in varchar2
+                      ,p_sg_estado in varchar2) return boolean;
+--
+function insere_endereco(p_nm_bairro     in varchar2
+                        ,p_nm_cidade     in varchar2
+                        ,p_sg_estado     in varchar2
+                        ,p_nr_cep        in varchar2
+                        ,p_ds_logradouro in varchar2) return number;
+--
+function obtem_id_endereco_cliente(p_id_cliente    in number
+                                  ,p_nm_bairro     in varchar2
+                                  ,p_nm_cidade     in varchar2
+                                  ,p_sg_estado     in varchar2
+                                  ,p_ds_logradouro in varchar2) return number;
+--
+procedure insere_restaurante_completa(p_nome_restaurante in varchar2
+                                     ,p_nm_cnpj_rest     in varchar2
+                                     ,p_nr_cnpj_rest     in varchar2
+                                     ,p_email            in varchar2
+                                     ,p_nr_telefone      in number
+                                     ,p_nr_ddd           in number
+                                     ,p_nr_ddi           in number
+                                     ,p_ds_telefone      in varchar2
+                                     ,p_nm_bairro        in varchar2
+                                     ,p_nm_cidade        in varchar2
+                                     ,p_sg_estado        in varchar2
+                                     ,p_nr_cep           in varchar2
+                                     ,p_ds_logradouro    in varchar2 );
+--
+procedure insere_cliente_completo(p_nm_cliente    in varchar2
+                                 ,p_nr_cpf        in varchar2
+                                 ,p_ds_email      in varchar2
+                                 ,p_nr_telefone   in number
+                                 ,p_nr_ddd        in number
+                                 ,p_nr_ddi        in number
+                                 ,p_ds_telefone   in varchar2
+                                 ,p_nm_bairro     in varchar2
+                                 ,p_nm_cidade     in varchar2
+                                 ,p_sg_estado     in varchar2
+                                 ,p_nr_cep        in varchar2
+                                 ,p_ds_logradouro in varchar2) ;
+--
+procedure insere_cardapio(p_nr_cnpj          in varchar2
+                         ,p_nm_item_cardapio in varchar2
+                         ,p_vl_item_cardapio in number
+                         ,p_ds_item_cardapio in varchar2) ;
+--
+function valor_cardapio(p_id_cardapio in number) return number;
+--
+procedure insere_pedido(p_nr_cpf        in varchar2
+                       ,p_nm_bairro     in varchar2
+                       ,p_nm_cidade     in varchar2
+                       ,p_sg_estado     in varchar2
+                       ,p_ds_logradouro in varchar2 );
+--
+procedure obtem_informacao_pedido(p_nr_pedido         in number
+                                 ,p_id_cliente       out number
+                                 ,p_id_endereco      out number
+                                 ,p_dt_pedido        out date
+                                 ,p_vl_pedido        out number
+                                 ,p_ds_status_pedido out varchar2 );
+--
+procedure atualiza_valor_pedido(p_id_cardapio in number
+                               ,p_nr_pedido   in number) ;
+--
+procedure insere_itens_pedido(p_id_cardapio in number
+                             ,p_nr_pedido   in number);
+--
+procedure insere_tipo_pagamento(p_ds_tp_pagto in varchar2);
+--
+function obtem_id_pagamento(p_tp_pagto in varchar2) return number ;
+--
+procedure insere_carrinho(p_nr_pedido   in number
+                         ,p_tp_pagto    in varchar2);
+--
+end pack_pr_prikka;
+/
+sho err
+--
+create or replace package body pack_pr_prikka as
+--
+FUNCTION VALIDA_CPF_CNPJ(V_CPF_CNPJ VARCHAR2) RETURN BOOLEAN IS
   e_CPF_CNPJ_null exception;
   e_cpf_cnpj_tama exception;
   TYPE ARRAY_DV IS VARRAY(2) OF PLS_INTEGER;
@@ -92,10 +231,8 @@ exception
   when others then
     raise_application_error(-20000, 'email_valido: '||sqlerrm);
 END VALIDA_CPF_CNPJ;
-/
-sho err
 --
-create or replace function email_valido (p_email in  varchar2) return boolean is
+function email_valido (p_email in  varchar2) return boolean is
   --
   v_email        varchar2(200);
   e_email_null   exception;
@@ -129,9 +266,8 @@ exception
   when others then
     raise_application_error(-20000, 'email_valido: '||sqlerrm);
 end email_valido;
-/
-sho err
-create or replace procedure insere_restaurante(p_nome_restaurante in varchar2
+--
+procedure insere_restaurante(p_nome_restaurante in varchar2
                                               ,p_nm_cnpj_rest     in varchar2
                                               ,p_nr_cnpj_rest     in varchar2
                                               ,p_email            in varchar2
@@ -192,10 +328,8 @@ exception
   when others then
     raise_application_error(-20000, 'insere_restaurante: '||sqlerrm);
 end insere_restaurante;
-/
-sho err
 --
-create or replace function cnpj_existe(p_nr_cnpj_rest in varchar2) return boolean is 
+function cnpj_existe(p_nr_cnpj_rest in varchar2) return boolean is 
 vn_count        number;
 e_cnpj_null     exception;
 e_cnpj_invalido exception;
@@ -229,10 +363,8 @@ exception
   when others then
     raise_application_error (-20000, 'cnpj_existe: ' || sqlerrm);
 end cnpj_existe;
-/
-sho err
 --
-create or replace function obtem_id_restaurante(p_nr_cnpj in varchar2) return number is
+function obtem_id_restaurante(p_nr_cnpj in varchar2) return number is
  vn_id_restaurante number;
  e_cnpj_null       exception;
  v_cpf_cnpj        varchar2(14);
@@ -259,12 +391,10 @@ exception
   when others then
     raise_application_error (-20000, 'obtem_id_restaurante: ' || sqlerrm);
 end obtem_id_restaurante;
-/
-sho err
 --
-create or replace procedure insere_cliente( p_nm_cliente in varchar2
-                                           ,p_nr_cpf     in varchar2
-                                           ,p_ds_email   in varchar2) is
+procedure insere_cliente( p_nm_cliente in varchar2
+                        , p_nr_cpf     in varchar2
+                        , p_ds_email   in varchar2) is
   vn_id_cliente  number;
   v_cpf_cnpj     varchar2(14);
   e_cliente_null exception;
@@ -322,10 +452,8 @@ exception
   when others then
     raise_application_error(-20000, 'insere_cliente: '||sqlerrm);
 end insere_cliente;
-/
-sho err
 --
-create or replace function existe_cliente(p_nr_cpf in varchar2) return boolean is
+function existe_cliente(p_nr_cpf in varchar2) return boolean is
 vn_count        number;
 e_cpf_null      exception;
 e_cpf_invalido  exception;
@@ -359,10 +487,8 @@ exception
   when others then
     raise_application_error (-20000, 'existe_cliente: ' || sqlerrm);
 end existe_cliente;
-/
-sho err
 --
-create or replace function obtem_id_cliente(p_nr_cpf in varchar2) return number is 
+function obtem_id_cliente(p_nr_cpf in varchar2) return number is 
  vv_nr_cpf varchar2(20);
  e_cpf_null exception;
  v_cpf_cnpj varchar2(14);
@@ -390,10 +516,8 @@ exception
   when others then
     raise_application_error (-20000, 'obtem_id_cliente: ' || sqlerrm);
 end obtem_id_cliente;
-/ 
-sho err
 --
-create or replace function insere_telefone(p_nr_telefone in number
+function insere_telefone(p_nr_telefone in number
                                           ,p_nr_ddd      in number
                                           ,p_nr_ddi      in number
                                           ,p_ds_telefone in varchar2) return number is
@@ -458,16 +582,14 @@ exception
   when others then
     raise_application_error(-20000, 'insere_telefone: '||sqlerrm);
 end insere_telefone;
-/ 
-sho err
 --
-create or replace procedure insere_cliente_telefone(p_nm_cliente  in varchar2
-                                                   ,p_nr_cpf      in varchar2
-                                                   ,p_ds_email    in varchar2
-                                                   ,p_nr_telefone in number
-                                                   ,p_nr_ddd      in number
-                                                   ,p_nr_ddi      in number
-                                                   ,p_ds_telefone in varchar2) is
+procedure insere_cliente_telefone(p_nm_cliente  in varchar2
+                                 ,p_nr_cpf      in varchar2
+                                 ,p_ds_email    in varchar2
+                                 ,p_nr_telefone in number
+                                 ,p_nr_ddd      in number
+                                 ,p_nr_ddi      in number
+                                 ,p_ds_telefone in varchar2) is
   vn_id_cliente  number;
   vn_id_telefone number;
   e_nao_tel      exception;  
@@ -506,17 +628,15 @@ exception
   when others then
     raise_application_error(-20000, 'insere_cliente_telefone: '||sqlerrm);
 end insere_cliente_telefone;
-/
-sho err
 --
-create or replace procedure insere_restaurante_telefone(p_nome_restaurante in varchar2
-                                                       ,p_nm_cnpj_rest     in varchar2
-                                                       ,p_nr_cnpj_rest     in varchar2
-                                                       ,p_email            in varchar2
-                                                       ,p_nr_telefone      in number
-                                                       ,p_nr_ddd           in number
-                                                       ,p_nr_ddi           in number
-                                                       ,p_ds_telefone      in varchar2) is 
+procedure insere_restaurante_telefone(p_nome_restaurante in varchar2
+                                     ,p_nm_cnpj_rest     in varchar2
+                                     ,p_nr_cnpj_rest     in varchar2
+                                     ,p_email            in varchar2
+                                     ,p_nr_telefone      in number
+                                     ,p_nr_ddd           in number
+                                     ,p_nr_ddi           in number
+                                     ,p_ds_telefone      in varchar2) is 
   vn_id_restaurante number;
   vn_id_telefone    number;
   vrt_tel_rest      t_pr_tel_rest%rowtype;
@@ -557,11 +677,9 @@ exception
   when others then
     raise_application_error(-20000, 'insere_restaurante_telefone: '||sqlerrm);
 end insere_restaurante_telefone;
-/
-sho err
 --
-create or replace procedure insere_estado(p_nm_estado in varchar2
-                                         ,p_sg_estado in varchar2) is
+procedure insere_estado(p_nm_estado in varchar2
+                       ,p_sg_estado in varchar2) is
 e_sem_nm      exception;
 e_sem_sg      exception;
 e_tam_sg      exception;
@@ -599,10 +717,8 @@ exception
   when others then
     raise_application_error(-20000, 'insere_estado: '||sqlerrm);
 end insere_estado;
-/
-sho err
 --
-create or replace function obtem_id_estado(p_sg_estado in varchar2) return number is 
+function obtem_id_estado(p_sg_estado in varchar2) return number is 
 vn_id_estado number;
 e_sg_null    exception;
 begin
@@ -626,10 +742,8 @@ exception
   when others then
     raise_application_error (-20000, 'obtem_id_estado: ' || sqlerrm);
 end obtem_id_estado;
-/
-sho err
 --
-create or replace function existe_estado(p_sg_estado in varchar2) return boolean is 
+function existe_estado(p_sg_estado in varchar2) return boolean is 
 vn_count number;
 e_sg_null    exception;
 e_sg_tam     exception;
@@ -660,12 +774,10 @@ exception
   when others then
     raise_application_error (-20000, 'existe_estado: ' || sqlerrm);
 end existe_estado;
-/
-sho err
 --
-create or replace procedure insere_cidade(p_sg_estado in varchar2
-                                         ,p_nm_estado in varchar2 default null
-                                         ,p_nm_cidade in varchar2) is
+procedure insere_cidade(p_sg_estado in varchar2
+                       ,p_nm_estado in varchar2 default null
+                       ,p_nm_cidade in varchar2) is
 e_sem_nm_cidade exception;
 e_sem_sg        exception;
 vrt_cidade      t_pr_cidade%rowtype;                               
@@ -701,11 +813,9 @@ exception
   when others then
     raise_application_error(-20000, 'insere_cidade: '||sqlerrm);
 end insere_cidade;
-/
-sho err
 --
-create or replace function obtem_id_cidade(p_nm_cidade in varchar2
-                                          ,p_sg_estado in varchar2) return number is 
+function obtem_id_cidade(p_nm_cidade in varchar2
+                        ,p_sg_estado in varchar2) return number is 
 vn_id_cidade  number;
 e_cidade_null exception;
 e_sg_null     exception;
@@ -739,11 +849,9 @@ exception
   when others then
     raise_application_error (-20000, 'obtem_id_cidade: ' || sqlerrm);
 end obtem_id_cidade;
-/
-sho err
 --
-create or replace function existe_cidade(p_nm_cidade in varchar2
-                                        ,p_sg_estado in varchar2) return boolean is 
+function existe_cidade(p_nm_cidade in varchar2
+                      ,p_sg_estado in varchar2) return boolean is 
 vn_count       number;
 e_cidade_null exception;
 e_sg_null     exception;
@@ -779,12 +887,10 @@ exception
   when others then
     raise_application_error (-20000, 'existe_cidade: ' || sqlerrm);
 end existe_cidade;
-/
-sho err
 --
-create or replace procedure insere_bairro (p_sg_estado in varchar2
-                                          ,p_nm_cidade in varchar2
-                                          ,p_nm_bairro in varchar2) is
+procedure insere_bairro (p_sg_estado in varchar2
+                        ,p_nm_cidade in varchar2
+                        ,p_nm_bairro in varchar2) is
 e_cidade_null exception;
 e_sg_null     exception;
 e_bairro_null exception;
@@ -831,12 +937,10 @@ exception
   when others then
     raise_application_error(-20000, 'insere_bairro: '||sqlerrm);
 end insere_bairro;
-/
-sho err
 --
-create or replace function obtem_id_bairro(p_nm_bairro in varchar2
-                                          ,p_nm_cidade in varchar2
-                                          ,p_sg_estado in varchar2) return number is 
+function obtem_id_bairro(p_nm_bairro in varchar2
+                        ,p_nm_cidade in varchar2
+                        ,p_sg_estado in varchar2) return number is 
 vn_id_bairro number;
 e_cidade_null exception;
 e_sg_null     exception;
@@ -880,12 +984,10 @@ exception
   when others then
     raise_application_error (-20000, 'obtem_id_bairro: ' || sqlerrm);
 end obtem_id_bairro;
-/
-sho err
 --
-create or replace function existe_bairro(p_nm_bairro in varchar2
-                                        ,p_nm_cidade in varchar2
-                                        ,p_sg_estado in varchar2) return boolean is 
+function existe_bairro(p_nm_bairro in varchar2
+                      ,p_nm_cidade in varchar2
+                      ,p_sg_estado in varchar2) return boolean is 
 vn_count number;
 e_cidade_null exception;
 e_sg_null     exception;
@@ -931,14 +1033,12 @@ exception
   when others then
     raise_application_error (-20000, 'existe_bairro: ' || sqlerrm);
 end existe_bairro;
-/
-sho err
 --
-create or replace function insere_endereco(p_nm_bairro     in varchar2
-                                          ,p_nm_cidade     in varchar2
-                                          ,p_sg_estado     in varchar2
-                                          ,p_nr_cep        in varchar2
-                                          ,p_ds_logradouro in varchar2) return number is
+function insere_endereco(p_nm_bairro     in varchar2
+                        ,p_nm_cidade     in varchar2
+                        ,p_sg_estado     in varchar2
+                        ,p_nr_cep        in varchar2
+                        ,p_ds_logradouro in varchar2) return number is
 vrt_endereco t_pr_endereco%rowtype;
 vv_cep       varchar2(12);
 e_tam_cep    exception;
@@ -986,14 +1086,12 @@ exception
   when others then
     raise_application_error (-20000, 'insere_endereco: ' || sqlerrm);
 end insere_endereco;
-/
-sho err
 --
-create or replace function obtem_id_endereco_cliente(p_id_cliente    in number
-                                                    ,p_nm_bairro     in varchar2
-                                                    ,p_nm_cidade     in varchar2
-                                                    ,p_sg_estado     in varchar2
-                                                    ,p_ds_logradouro in varchar2) return number is 
+function obtem_id_endereco_cliente(p_id_cliente    in number
+                                  ,p_nm_bairro     in varchar2
+                                  ,p_nm_cidade     in varchar2
+                                  ,p_sg_estado     in varchar2
+                                  ,p_ds_logradouro in varchar2) return number is 
 vn_id_endereco number;
 begin
   --
@@ -1024,22 +1122,20 @@ exception
   when others then
     raise_application_error (-20000, 'obtem_id_endereco_cliente: ' || sqlerrm);
 end obtem_id_endereco_cliente;
-/
-sho err
 --
-create or replace procedure insere_restaurante_completa(p_nome_restaurante in varchar2
-                                                       ,p_nm_cnpj_rest     in varchar2
-                                                       ,p_nr_cnpj_rest     in varchar2
-                                                       ,p_email            in varchar2
-                                                       ,p_nr_telefone      in number
-                                                       ,p_nr_ddd           in number
-                                                       ,p_nr_ddi           in number
-                                                       ,p_ds_telefone      in varchar2
-                                                       ,p_nm_bairro        in varchar2
-                                                       ,p_nm_cidade        in varchar2
-                                                       ,p_sg_estado        in varchar2
-                                                       ,p_nr_cep           in varchar2
-                                                       ,p_ds_logradouro    in varchar2 ) is 
+procedure insere_restaurante_completa(p_nome_restaurante in varchar2
+                                     ,p_nm_cnpj_rest     in varchar2
+                                     ,p_nr_cnpj_rest     in varchar2
+                                     ,p_email            in varchar2
+                                     ,p_nr_telefone      in number
+                                     ,p_nr_ddd           in number
+                                     ,p_nr_ddi           in number
+                                     ,p_ds_telefone      in varchar2
+                                     ,p_nm_bairro        in varchar2
+                                     ,p_nm_cidade        in varchar2
+                                     ,p_sg_estado        in varchar2
+                                     ,p_nr_cep           in varchar2
+                                     ,p_ds_logradouro    in varchar2 ) is 
 vn_id_endereco    number;
 vn_id_restaurante number;
 e_cnpj_duplicado  exception;
@@ -1084,22 +1180,19 @@ exception
   when others then
     raise_application_error(-20000, 'insere_restaurante_completa: '||sqlerrm);
 end insere_restaurante_completa;
-/
-sho err
 --
-create or replace procedure insere_cliente_completo(p_nm_cliente  in varchar2
-                                                   ,p_nr_cpf      in varchar2
-                                                   ,p_ds_email    in varchar2
-                                                   ,p_nr_telefone in number
-                                                   ,p_nr_ddd      in number
-                                                   ,p_nr_ddi      in number
-                                                   ,p_ds_telefone in varchar2
-                                                   ,p_nm_bairro     in varchar2
-                                                   ,p_nm_cidade     in varchar2
-                                                   ,p_sg_estado     in varchar2
-                                                   ,p_nr_cep        in varchar2
-                                                   ,p_ds_logradouro in varchar2
-                                                   ) is
+procedure insere_cliente_completo(p_nm_cliente    in varchar2
+                                 ,p_nr_cpf        in varchar2
+                                 ,p_ds_email      in varchar2
+                                 ,p_nr_telefone   in number
+                                 ,p_nr_ddd        in number
+                                 ,p_nr_ddi        in number
+                                 ,p_ds_telefone   in varchar2
+                                 ,p_nm_bairro     in varchar2
+                                 ,p_nm_cidade     in varchar2
+                                 ,p_sg_estado     in varchar2
+                                 ,p_nr_cep        in varchar2
+                                 ,p_ds_logradouro in varchar2) is
 e_cpf_exist     exception;
 e_endereco_null exception;
 vn_id_endereco  number;
@@ -1143,13 +1236,11 @@ exception
   when others then
     raise_application_error(-20000, 'insere_cliente_completo: '||sqlerrm);
 end insere_cliente_completo;
-/
-sho err
 --
-create or replace procedure insere_cardapio(p_nr_cnpj          in varchar2
-                                           ,p_nm_item_cardapio in varchar2
-                                           ,p_vl_item_cardapio in number
-                                           ,p_ds_item_cardapio in varchar2) is
+procedure insere_cardapio(p_nr_cnpj          in varchar2
+                         ,p_nm_item_cardapio in varchar2
+                         ,p_vl_item_cardapio in number
+                         ,p_ds_item_cardapio in varchar2) is
 vrt_cardapio t_pr_cardapio%rowtype;
 e_vl_null    exception;
 e_nm_null    exception; 
@@ -1182,10 +1273,8 @@ exception
   when others then
     raise_application_error(-20000, 'insere_cardapio: '||sqlerrm);
 end insere_cardapio;
-/
-sho err
 --
-create or replace function valor_cardapio(p_id_cardapio in number) return number is
+function valor_cardapio(p_id_cardapio in number) return number is
 v_valor_cardapio number;
 e_cardapio_null  exception;
 begin
@@ -1209,14 +1298,12 @@ exception
   when others then
     raise_application_error (-20000, 'valor_cardapio: ' || sqlerrm);
 end valor_cardapio;
-/
-sho err
 --
-create or replace procedure insere_pedido(p_nr_cpf        in varchar2
-                                         ,p_nm_bairro     in varchar2
-                                         ,p_nm_cidade     in varchar2
-                                         ,p_sg_estado     in varchar2
-                                         ,p_ds_logradouro in varchar2 ) is
+procedure insere_pedido(p_nr_cpf        in varchar2
+                       ,p_nm_bairro     in varchar2
+                       ,p_nm_cidade     in varchar2
+                       ,p_sg_estado     in varchar2
+                       ,p_ds_logradouro in varchar2 ) is
 vrt_pedido        t_pr_pedido%rowtype;
 e_cpf_null        exception;
 e_bairro_null     exception;
@@ -1277,15 +1364,13 @@ exception
   when others then
     raise_application_error(-20000, 'insere_pedido: '||sqlerrm);
 end insere_pedido;
-/
-sho err
 --
-create or replace procedure obtem_informacao_pedido(p_nr_pedido         in number
-                                                   ,p_id_cliente       out number
-                                                   ,p_id_endereco      out number
-                                                   ,p_dt_pedido        out date
-                                                   ,p_vl_pedido        out number
-                                                   ,p_ds_status_pedido out varchar2 ) is
+procedure obtem_informacao_pedido(p_nr_pedido         in number
+                                 ,p_id_cliente       out number
+                                 ,p_id_endereco      out number
+                                 ,p_dt_pedido        out date
+                                 ,p_vl_pedido        out number
+                                 ,p_ds_status_pedido out varchar2 ) is
 vrt_pedido    t_pr_pedido%rowtype;
 e_null_pedido exception;
 begin
@@ -1313,11 +1398,9 @@ exception
   when others then
     raise_application_error(-20000, 'obtem_informacao_pedido: '||sqlerrm);
 end obtem_informacao_pedido;
-/
-sho err
 --
-create or replace procedure atualiza_valor_pedido(p_id_cardapio in number
-                                                 ,p_nr_pedido   in number) is
+procedure atualiza_valor_pedido(p_id_cardapio in number
+                               ,p_nr_pedido   in number) is
 v_valor         number;
 e_cardapio_null exception;
 e_pedido_null   exception;
@@ -1345,11 +1428,9 @@ exception
   when others then
     raise_application_error(-20000, 'atualiza_valor_pedido: '||sqlerrm);
 end atualiza_valor_pedido;
-/
-sho err
 --
-create or replace procedure insere_itens_pedido(p_id_cardapio in number
-                                               ,p_nr_pedido   in number) is
+procedure insere_itens_pedido(p_id_cardapio in number
+                             ,p_nr_pedido   in number) is
 e_null_cardapio exception;
 e_null_pedido   exception;
 vrt_pedido      t_pr_pedido%rowtype;      
@@ -1390,10 +1471,8 @@ exception
   when others then
     raise_application_error(-20000, 'insere_itens_pedido: '||sqlerrm);
 end insere_itens_pedido;
-/
-sho err
 --
-create or replace procedure insere_tipo_pagamento(p_ds_tp_pagto in varchar2) is
+procedure insere_tipo_pagamento(p_ds_tp_pagto in varchar2) is
 e_tp_null       exception;
 e_tp_tam        exception;
 vn_id_pagamento number;
@@ -1420,10 +1499,8 @@ exception
   when others then
     raise_application_error(-20000, 'insere_tipo_pagamento: '||sqlerrm);
 end insere_tipo_pagamento;
-/
-sho err
 --
-create or replace function obtem_id_pagamento(p_tp_pagto in varchar2) return number is
+function obtem_id_pagamento(p_tp_pagto in varchar2) return number is
 vn_id_pagamento number;
 e_tp_null       exception;
 begin
@@ -1447,11 +1524,9 @@ exception
   when others then
     raise_application_error (-20000, 'obtem_id_pagamento: ' || sqlerrm);
 end obtem_id_pagamento;
-/
-sho err
 --
-create or replace procedure insere_carrinho(p_nr_pedido   in number
-                                          ,p_tp_pagto    in varchar2) is
+procedure insere_carrinho(p_nr_pedido   in number
+                         ,p_tp_pagto    in varchar2) is
 vn_id_tp_pagamento number;
 vrt_pedido         t_pr_pedido%rowtype;
 vrt_carrinho       t_pr_carrinho%rowtype;
@@ -1492,10 +1567,7 @@ exception
   when others then
     raise_application_error(-20000, 'insere_carrinho: '||sqlerrm);
 end insere_carrinho;
+--
+end pack_pr_prikka;
 /
 sho err
---
-
-
-exec insere_restaurante_completa('PRIKKAS','PRIKKAS', '11.830.861/0001-13', 'prikkas@fiap.com.br' , 97793821,011, 55, 'celular' , 'Unova','Bulbapedia','SP', '90842-355','Rua 3 , n 9');
-exec insere_cliente_completo('Richard Rich','243.885.210-00','rich@fiap.com.br',11998877,11,55,'CELULAR','Vila Nova','São Paolo','SP','17120-970','Rua Bola , n 3');
