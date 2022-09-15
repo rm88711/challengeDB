@@ -8,9 +8,11 @@ Kleber Albert de Sousa Monteiro             RM: 88711
 Mikael Candiani Tine                        RM: 85250
 
 Renato Miranda Esmail                       RM: 86701
-
-O Insert esta na Ultima linha desse arquivo
 */
+
+--O INSERT ESTA NA ULTIMA LINHA DESSE ARQUIVO
+
+--
 CREATE OR REPLACE FUNCTION VALIDA_CPF_CNPJ(V_CPF_CNPJ VARCHAR2) RETURN BOOLEAN IS
   e_CPF_CNPJ_null exception;
   e_cpf_cnpj_tama exception;
