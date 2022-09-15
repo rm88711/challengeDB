@@ -141,7 +141,7 @@ CREATE TABLE t_pr_pedido (
     nr_pedido        NUMBER(20) NOT NULL,
     id_cliente       NUMBER(10) NOT NULL,
     id_endereco      NUMBER(10) NOT NULL,
-    dt_pedido        DATE NOT NULL,
+    dt_pedido        DATE,
     vl_pedido        NUMBER(20) NOT NULL,
     ds_status_pedido VARCHAR2(15) NOT NULL
 );
