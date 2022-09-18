@@ -1022,7 +1022,7 @@ exception
   when too_many_rows then
     raise_application_error (-20000, 'Mais de um endereço localizado reveja seu cadastro.');
   when no_data_found then
-    raise_application_error (-20000, 'Endereço não cadastrado para o cliente.');
+    raise_application_error (-20015, 'Endereço não cadastrado para o cliente.');
   when others then
     raise_application_error (-20000, 'obtem_id_endereco_cliente: ' || sqlerrm);
 end obtem_id_endereco_cliente;
@@ -1102,15 +1102,19 @@ create or replace procedure insere_cliente_completo(p_nm_cliente  in varchar2
                                                    ,p_nr_cep        in varchar2
                                                    ,p_ds_logradouro in varchar2
                                                    ) is
-e_cpf_exist     exception;
+e_cpf_invalid     exception;
 e_endereco_null exception;
 vn_id_endereco  number;
 vn_id_cliente   number;
 begin
   --
-  if existe_cliente(p_nr_cpf => p_nr_cpf) then
-    raise e_cpf_exist;
-  else
+  if not VALIDA_CPF_CNPJ(p_nr_cpf) then
+    --
+    raise e_cpf_invalid;
+    --
+  end if;
+  --
+  if not existe_cliente(p_nr_cpf => p_nr_cpf) then
     insere_cliente_telefone(p_nm_cliente  => p_nm_cliente 
                            ,p_nr_cpf      => p_nr_cpf   
                            ,p_ds_email    => p_ds_email
@@ -1140,8 +1144,8 @@ begin
 exception
   when e_endereco_null then
     raise_application_error(-20000, 'Não foi possível cadastrar o endereço '||sqlerrm);
-  when e_cpf_exist then
-    raise_application_error(-20000, 'CPF já foi cadastrado.');
+  when e_cpf_invalid then
+    raise_application_error(-20000, 'CPF invalido.');
   when others then
     raise_application_error(-20000, 'insere_cliente_completo: '||sqlerrm);
 end insere_cliente_completo;
@@ -1250,11 +1254,11 @@ begin
   --
   vrt_pedido.id_cliente := obtem_id_cliente(p_nr_cpf => p_nr_cpf);
   --
-  vrt_pedido.id_endereco := obtem_id_endereco_cliente(p_id_cliente    => vrt_pedido.id_cliente
-                                                     ,p_nm_bairro     => p_nm_bairro
-                                                     ,p_nm_cidade     => p_nm_cidade
-                                                     ,p_sg_estado     => p_sg_estado
-                                                     ,p_ds_logradouro => p_ds_logradouro);
+    vrt_pedido.id_endereco := obtem_id_endereco_cliente(p_id_cliente    => vrt_pedido.id_cliente
+                                                       ,p_nm_bairro     => p_nm_bairro
+                                                       ,p_nm_cidade     => p_nm_cidade
+                                                       ,p_sg_estado     => p_sg_estado
+                                                       ,p_ds_logradouro => p_ds_logradouro);
   --
   vrt_pedido.nr_pedido        := sq_pr_pedido.nextval;
   vrt_pedido.dt_pedido        := sysdate;
@@ -1497,7 +1501,60 @@ end insere_carrinho;
 /
 sho err
 --
-
-
+exec insere_estado('ACRE'	              , 'AC');
+exec insere_estado('ALAGOAS'	          , 'AL');
+exec insere_estado('AMAPÁ'	              , 'AP');
+exec insere_estado('AMAZONAS'	          , 'AM');
+exec insere_estado('BAHIA'	              , 'BA');
+exec insere_estado('CEARÁ'	              , 'CE');
+exec insere_estado('DISTRITO FEDERAL'	  , 'DF');
+exec insere_estado('ESPÍRITO SANTO'	      , 'ES');
+exec insere_estado('GOIÁS'	              , 'GO');
+exec insere_estado('MARANHÃO'	          , 'MA');
+exec insere_estado('MATO GROSSO'	      , 'MT');
+exec insere_estado('MATO GROSSO DO SUL'	  , 'MS');
+exec insere_estado('MINAS GERAIS'	      , 'MG');
+exec insere_estado('PARÁ'	              , 'PA');
+exec insere_estado('PARAÍBA'	          , 'PB');
+exec insere_estado('PARANÁ'               , 'PR');
+exec insere_estado('PERNAMBUCO'	          , 'PE');
+exec insere_estado('PIAUÍ'	              , 'PI');
+exec insere_estado('RIO DE JANEIRO'	      , 'RJ');
+exec insere_estado('RIO GRANDE DO NORTE'  ,'RN');
+exec insere_estado('RIO GRANDE DO SUL'	  , 'RS');
+exec insere_estado('RONDÔNIA'	          , 'RO');
+exec insere_estado('RORAIMA'	          , 'RR');
+exec insere_estado('SANTA CATARINA'	      , 'SC');
+exec insere_estado('SÃO PAULO'	          , 'SP');
+exec insere_estado('SERGIPE'	          , 'SE');
+exec insere_estado('TOCANTINS'	          , 'TO');
+--
+exec insere_bairro('SP','São Paulo','Coqueiro');
+exec insere_bairro('SP','São Paulo','Paulinho');
+exec insere_bairro('SP','Santos','Urubu');
+exec insere_bairro('AC','Rio Novo','tocaia');
+exec insere_bairro('AC','Rio Branco','Auau');
+exec insere_bairro('AC','Buzinho','Imperial');
+exec insere_bairro('AL','MACEIÓ','Lagoazinha');
+exec insere_bairro('AL','ARAPIRACA','pula pula');
+exec insere_bairro('AL','PENEDO','Pézinho');
+exec insere_bairro('PA','ANANINDEUA','gaga');
+exec insere_bairro('PA','SANTARÉM','zigue zague');
+exec insere_bairro('PA','MARABÁ','Peneirinha');
+exec insere_bairro('ES','Viana','Centro');
+exec insere_bairro('ES','Bom Pastor','Ribeira');
+exec insere_bairro('ES','Nova Venécia','Universal');
+--
+exec insere_tipo_pagamento('Débito');
+exec insere_tipo_pagamento('crédito');
+exec insere_tipo_pagamento('pix');
+exec insere_tipo_pagamento('dinheiro');
+exec insere_tipo_pagamento('alimentação');
+exec insere_tipo_pagamento('refieção');
+--
+commit;
 exec insere_restaurante_completa('PRIKKAS','PRIKKAS', '11.830.861/0001-13', 'prikkas@fiap.com.br' , 97793821,011, 55, 'celular' , 'Unova','Bulbapedia','SP', '90842-355','Rua 3 , n 9');
-exec insere_cliente_completo('Richard Rich','243.885.210-00','rich@fiap.com.br',11998877,11,55,'CELULAR','Vila Nova','São Paolo','SP','17120-970','Rua Bola , n 3');
+--
+--
+exec insere_cliente_completo('Richard Rich','243.885.210-00','rich@fiap.com.br',11998877,11,55,'CELULAR','Vila Nova','São Paulo','SP','17120-970','Rua Bola , n 3');
+--
